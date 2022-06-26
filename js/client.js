@@ -2,8 +2,8 @@ var url = "ws://" + window.location.hostname + ":8080/ws";
 var socket;
 var gauge = new LinearGauge({
     renderTo: "gauge",
-    width: 400,
-    height: 150,
+    width: 500,
+    height: 120,
     minValue: 0,
     maxValue: 100,
     highlights: [
@@ -161,7 +161,7 @@ function hex2bin(hex){
     return (parseInt(hex, 16).toString(2)).padStart(8, '0');
 }
 
-function setWebcam(motorStatus) {
+function setWebcam(motorStatus, video) {
     video = document.getElementById("webcam");
     gauges = document.getElementById("gauges");
     if (motorStatus == 3) {
@@ -283,3 +283,14 @@ function toggleWebcam() {
 }
 
 connectToServer();
+
+if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    console.log("enabling webcam");
+    navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function (stream) {
+        document.getElementById("constant-webcam").srcObject = stream;
+    })
+    .catch(function (err0r) {
+        console.log("Something went wrong!");
+    });
+}
