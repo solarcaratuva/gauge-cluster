@@ -6,25 +6,15 @@
     <title>Gauge Display</title>
     <link href="static/fonts.css" rel="stylesheet">
     <link href="static/style.css" rel="stylesheet">
-    <!--<script
-      src="//code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
-      crossorigin="anonymous"></script>
-    <link href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
-    <script type="text/javascript" src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    -->
 </head>
 
 <body>
     <div id="wrapper">
         <div id="controls">
             <button onclick="toggleWebcam()">Toggle Rearview</button>
-            <!--<button onclick="sendCommand('ping')">Ping</button>-->
             <button onclick="location.reload()">Reconnect</button>
-            <!--<button onclick="disconnectFromServer()">Disconnect</button>-->
             <span id="websocket-status"></span>
         </div>
-        <!--<canvas id="gauges"></canvas>-->
         <div id="speed-gauge">
             <span id="speed">0</span>
             <span id="units">MPH</span>
@@ -34,7 +24,6 @@
         </div>
         <div id="gauges">
         </div>
-        <!--<canvas id="gauge"></canvas>-->
         <video autoplay="true" id="webcam" hidden="true"></video>
         <div id="info">
             <div id="gear">

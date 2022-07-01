@@ -58,7 +58,6 @@ button {
 
 #constant-webcam {
     width: 100%;
-    border-radius: 0.5rem;
     margin-top: -15%;
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);

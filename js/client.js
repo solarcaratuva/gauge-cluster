@@ -1,52 +1,5 @@
 var url = "ws://" + window.location.hostname + ":8080/ws";
 var socket;
-/*var gauge = new LinearGauge({
-    renderTo: "gauge",
-    width: 500,
-    height: 120,
-    minValue: 0,
-    maxValue: 100,
-    highlights: [
-        {
-            "from": 0,
-            "to": 100,
-            "color": "rgba(0, 0, 0, 0)"
-        }
-    ],
-    majorTicks: [
-        "0",
-        "25",
-        "50",
-        "75",
-        "100",
-    ],
-    minorTicks: 0,
-    strokeTicks: true,
-    borderShadowWidth: 0,
-    borders: false,
-    barBeginCircle: false,
-    tickSide: "left",
-    needle: false,
-    needleSide: "left",
-    needleType: "line",
-    needleWidth: 3,
-    numberSide: "left",
-    colorMajorTicks: "#fff",
-    colorMinorTicks: "#fff",
-    colorTitle: "#eee",
-    colorUnits: "#ccc",
-    colorNumbers: "#eee",
-    colorPlate: "#000",
-    colorNeedle: "#ff0000",
-    colorNeedleEnd: "#222",
-    colorBarProgress: "#f44336",
-    animationDuration: 1000,
-    animationRule: "linear",
-    animationTarget: "plate",
-    barWidth: 5,
-    ticksWidth: 10,
-    ticksWidthMinor: 15
-}).draw();*/
 
 var turnSignalToggle = false;
 var turnSignalMode = 0;
@@ -288,8 +241,6 @@ function toggleWebcam() {
     setWebcam(manualWebcamToggle);
 }
 
-connectToServer({"subscribe": [0x123, 0x201, 0x301, 0x315, 0x325, 0x406]});
-
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     console.log("enabling webcam");
     navigator.mediaDevices.getUserMedia({ video: true })
@@ -300,3 +251,5 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         console.log("Something went wrong!");
     });
 }
+
+connectToServer({"subscribe": [0x123, 0x201, 0x301, 0x315, 0x325, 0x406]});
