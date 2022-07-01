@@ -83,13 +83,19 @@ function turnSignalsBlink(mode) {
 
 
 function updateGUI(toUpdate) {
+    // 0x123
+    if ("fan_error" in toUpdate) {
+        let bpsIndicator = document.querySelector("#bps-indicator > span");
+        if (toUpdate.bps_error) {
+            bpsIndicator.style.background = "rgba(255, 0, 0, 1)";
+        }
+    }
     // 0x201
     if ("throttle" in toUpdate) {
-        gauge.update({value: toUpdate.throttle});
+        //gauge.update({value: toUpdate.throttle});
     }
     // 0x301
     if ("hazards" in toUpdate) {
-
         if (toUpdate.hazards == 1) {
             turnSignalsBlink(1);
         } else if (toUpdate.left_turn_signal == 1) {
@@ -107,7 +113,6 @@ function updateGUI(toUpdate) {
         // ~18.3inches
         let speed = toUpdate.motor_rpm * 18.8 * Math.PI * 60.0 / 63360.0;
         document.getElementById("speed").innerHTML = Math.floor(speed);
-        document.getElementById("battery-voltage").innerHTML = toUpdate.battery_voltage;
         document.getElementById("motor-current").innerHTML = toUpdate.motor_current;
         document.getElementById("motor-temp").innerHTML = toUpdate.fet_temperature;
     }
@@ -154,6 +159,8 @@ function updateGUI(toUpdate) {
     // 0x406
     if ("pack_voltage" in toUpdate) {
         console.log(toUpdate);
+        document.getElementById("battery-voltage").innerHTML = toUpdate.pack_voltage / 100.0;
+        document.getElementById("battery-current").innerHTML = toUpdate.pack_current / 10.0;
     }
 }
 
@@ -210,14 +217,13 @@ function parseCANMessage(msg) {
     updateGUI(result);
 }
 
-function connectToServer() {
+function connectToServer(command) {
     let wsStatus = document.getElementById("websocket-status");
     if (socket == null) {
         socket = new WebSocket(url);
         // Connection opened
         socket.addEventListener("open", function (event) {
             console.log("Connected to", url);
-            command = {"subscribe": [0x201, 0x301, 0x315, 0x325, 0x406]}
             sendCommand(JSON.stringify(command));
             wsStatus.innerHTML = "OK";
             wsStatus.style.color = "#00ff00";
@@ -282,7 +288,7 @@ function toggleWebcam() {
     setWebcam(manualWebcamToggle);
 }
 
-connectToServer();
+connectToServer({"subscribe": [0x123, 0x201, 0x301, 0x315, 0x325, 0x406]});
 
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     console.log("enabling webcam");

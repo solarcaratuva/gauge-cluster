@@ -56,7 +56,7 @@ button {
 #constant-webcam {
     width: 100%;
     border-radius: 0.5rem;
-    margin-top: -15vh;
+    margin-top: -15%;
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
     z-index: -1;
@@ -110,23 +110,34 @@ button {
 }
 
 #gear {
-    width: 10rem;
+    width: 8rem;
 }
 
 #turn-signals {
-    width: 6rem;
+    width: 8rem;
+    font-weight: bold;
 }
 
 #status {
-    display: flex;
     flex-direction: column;
-    align-items: left;
 }
 
 
 .status-section {
+    width: 100%;
+    text-align: right;
     font-size: 1.5rem;
 }
+
+#bps-indicator > span {
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: rgba(0, 255, 0, 1);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+
 
 #websocket-status {
     font-size: 1.5rem;
