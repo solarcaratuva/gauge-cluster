@@ -1,6 +1,6 @@
 var url = "ws://" + window.location.hostname + ":8080/ws";
 var socket;
-var gauge = new LinearGauge({
+/*var gauge = new LinearGauge({
     renderTo: "gauge",
     width: 500,
     height: 120,
@@ -46,7 +46,7 @@ var gauge = new LinearGauge({
     barWidth: 5,
     ticksWidth: 10,
     ticksWidthMinor: 15
-}).draw();
+}).draw();*/
 
 var turnSignalToggle = false;
 var turnSignalMode = 0;
