@@ -67,7 +67,8 @@ function updateGUI(toUpdate) {
         let speed = toUpdate.motor_rpm * 18.8 * Math.PI * 60.0 / 63360.0;
         document.getElementById("speed").innerHTML = Math.floor(speed);
         document.getElementById("motor-current").innerHTML = toUpdate.motor_current;
-        document.getElementById("motor-temp").innerHTML = toUpdate.fet_temperature;
+        document.getElementById("motor-temp").innerHTML = toUpdate.fet_temp;
+        console.log(toUpdate);
     }
     // 0x315
     if ("power_mode" in toUpdate) {
@@ -111,8 +112,7 @@ function updateGUI(toUpdate) {
     }
     // 0x406
     if ("pack_voltage" in toUpdate) {
-        console.log(toUpdate);
-        document.getElementById("battery-voltage").innerHTML = toUpdate.pack_voltage / 100.0;
+        document.getElementById("battery-voltage").innerHTML = toUpdate.pack_voltage / 100;
         document.getElementById("battery-current").innerHTML = toUpdate.pack_current / 10.0;
     }
 }
@@ -163,7 +163,7 @@ function parseCANMessage(msg) {
         //setWebcam(result["motor_status"]);
     } else if ("battery_voltage" in result) {
         result.battery_voltage *= 0.5;
-        result.fet_temperature *= 5;
+        result.fet_temp *= 5;
         result.pwm_duty *= 0.5;
         result.lead_angle *= 0.5;
     }
