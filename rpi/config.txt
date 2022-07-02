@@ -1,0 +1,29 @@
+# See /boot/overlays/README for all available options
+#dtparam=spi=on
+#dtparam=i2c_arm=on
+#dtoverlay=mcp251xfd,spi0-0,oscillator=20000000,interrupt=25
+
+#dtoverlay=vc4-fkms-v3d
+#initramfs initramfs-linux.img followkernel
+
+# PiCAN FD
+#dtparam=i2c_arm=on
+#dtparam=i2c_vc=on
+#dtparam=spi=on
+#dtoverlay=mcp251xfd,spi0-0,oscillator=40000000,interrupt=25
+#dtoverlay=mcp251xfd-can0,oscillator=40000000,interrupt=25
+
+# PiCAN 3
+dtparam=spi=on
+dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=25
+dtoverlay=spi-bcm2835-overlay
+
+# RTC
+dtoverlay=i2c-rtc,pcf8523
+
+hdmi_force_hotplug=1
+max_usb_current=1
+
+[pi4]
+# Run as fast as firmware / board allows
+arm_boost=1
