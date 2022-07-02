@@ -78,6 +78,14 @@ function updateGUI(toUpdate) {
         let unselectFontSize = "3rem";
         let selectColor = "#fff";
         let unselectColor = "#757575";
+        let mode = document.querySelector("#mode > span");
+        if (toUpdate.power_mode == 0) {
+            mode.innerHTML = "ECO";
+            mode.style.color = "rgba(0, 255, 0, 1)";
+        } else {
+            mode.innerHTML = "STD";
+            mode.style.color = "rgba(255, 255, 0, 1)";
+        }
         switch(toUpdate.motor_status) {
             case 2:
                 // forward indicator
@@ -112,7 +120,7 @@ function updateGUI(toUpdate) {
     }
     // 0x406
     if ("pack_voltage" in toUpdate) {
-        document.getElementById("battery-voltage").innerHTML = toUpdate.pack_voltage / 100;
+        document.getElementById("battery-voltage").innerHTML = Math.round(toUpdate.pack_voltage / 100);
         document.getElementById("battery-current").innerHTML = toUpdate.pack_current / 10.0;
     }
 }
