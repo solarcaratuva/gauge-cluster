@@ -62,13 +62,12 @@ function updateGUI(toUpdate) {
     }
     // 0x325
     if ("battery_voltage" in toUpdate) {
-        // 460-470mm wheel diameter
-        // ~18.3inches
-        let speed = toUpdate.motor_rpm * 18.8 * Math.PI * 60.0 / 63360.0;
+        // ~19.2inches wheel diameter
+        let speed = toUpdate.motor_rpm * 19.2 * Math.PI * 60.0 / 63360.0;
         document.getElementById("speed").innerHTML = Math.floor(speed);
         document.getElementById("motor-current").innerHTML = toUpdate.motor_current;
         document.getElementById("motor-temp").innerHTML = toUpdate.fet_temp;
-        console.log(toUpdate);
+        //console.log(toUpdate);
     }
     // 0x315
     if ("power_mode" in toUpdate) {
@@ -226,7 +225,6 @@ function disconnectFromServer() {
         console.log("Disconnected from websocket server!");
     }
 }
-
 
 function sendCommand(command) {
     if (socket == null) {
