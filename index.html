@@ -11,13 +11,20 @@
 <body>
     <div id="wrapper">
         <div id="controls">
-            <button onclick="toggleWebcam()">Toggle Rearview</button>
-            <button onclick="location.reload()">Reconnect</button>
+            <button onclick="toggleWebcam()">Rearview</button>
+            <button onclick="location.reload()">Refresh</button>
             <span id="websocket-status"></span>
         </div>
         <div id="speed-gauge">
             <span id="speed">0</span>
             <span id="units">MPH</span>
+        </div>
+        <div id="gear-indicator">
+            <div id="gear">
+                <span>D</span>
+                <span>N</span>
+                <span>R</span>
+            </div>
         </div>
         <div id="constant-webcam-wrapper">
             <video autoplay="true" id="constant-webcam"></video>
@@ -26,11 +33,6 @@
         </div>
         <video autoplay="true" id="webcam" hidden="true"></video>
         <div id="info">
-            <div id="gear">
-                <span>D</span>
-                <span>N</span>
-                <span>R</span>
-            </div>
             <div id="mode">
                 <span>STD</span>
             </div>

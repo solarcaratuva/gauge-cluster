@@ -14,7 +14,7 @@ function turnSignalsBlink(mode) {
     if (mode != turnSignalMode) {
         clearInterval(turnSignalInterval);
         turnSignalInterval = setInterval(function () {
-            console.log(turnSignalToggle);
+            //console.log(turnSignalToggle);
             if (turnSignalToggle) {
                 if (turnSignalMode == 1 || turnSignalMode == 2) {
                     leftTurnSignal.style.color = onTurnSignalColor;
@@ -59,15 +59,6 @@ function updateGUI(toUpdate) {
             turnSignalIntervalMode = 0;
             clearInterval(turnSignalInterval);
         }
-    }
-    // 0x325
-    if ("battery_voltage" in toUpdate) {
-        // ~19.2inches wheel diameter
-        let speed = toUpdate.motor_rpm * 19.2 * Math.PI * 60.0 / 63360.0;
-        document.getElementById("speed").innerHTML = Math.floor(speed);
-        document.getElementById("motor-current").innerHTML = toUpdate.motor_current;
-        document.getElementById("motor-temp").innerHTML = toUpdate.fet_temp;
-        //console.log(toUpdate);
     }
     // 0x315
     if ("power_mode" in toUpdate) {
@@ -117,10 +108,22 @@ function updateGUI(toUpdate) {
                 setWebcam(0);
         }
     }
+    // 0x325
+    if ("battery_voltage" in toUpdate) {
+        // ~19.2inches wheel diameter
+        let speed = toUpdate.motor_rpm * 19.2 * Math.PI * 60.0 / 63360.0;
+        document.getElementById("speed").innerHTML = Math.floor(speed);
+        document.getElementById("motor-current").innerHTML = toUpdate.motor_current;
+        document.getElementById("motor-temp").innerHTML = toUpdate.fet_temp;
+        //console.log(toUpdate);
+    }
     // 0x406
     if ("pack_voltage" in toUpdate) {
         document.getElementById("battery-voltage").innerHTML = Math.round(toUpdate.pack_voltage / 100);
         document.getElementById("battery-current").innerHTML = toUpdate.pack_current / 10.0;
+    }
+    // 0x426
+    if ("low_temperature" in toUpdate) {
     }
 }
 
@@ -258,4 +261,4 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     });
 }
 
-connectToServer({"subscribe": [0x123, 0x201, 0x301, 0x315, 0x325, 0x406]});
+connectToServer({"subscribe": [0x123, 0x201, 0x301, 0x315, 0x325, 0x406, 0x426]});
